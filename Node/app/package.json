@@ -1,0 +1,10 @@
+{
+  "author": "Maciej Socha",
+  "name": "scalac",
+  "description": "Scalac docker app",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "~4.16.0",
+    "request": "~2.83.0"
+  }
+}
