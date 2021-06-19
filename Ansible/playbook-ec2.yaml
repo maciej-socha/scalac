@@ -14,6 +14,16 @@
         state: latest
         update_only: yes
 
+- name: Install git
+  hosts: ec2
+  become: yes
+  tasks:
+    - name: git
+      yum:
+        name: git
+        state: present
+        update_cache: yes
+
 - name: Install docker
   hosts: ec2
   become: yes
@@ -25,6 +35,17 @@
   hosts: ec2
   gather_facts: false
   become: yes
+  ignore_errors: yes
   tasks:
-  - import_role:
-      name: jenkins
+    - import_role:
+        name: jenkins
+    - name: Ensure group "docker" exists
+      ansible.builtin.group:
+        name: docker
+        state: present
+    - name: Add jenkins user to docker group
+      user:
+        name: jenkins
+        groups: docker
+        append: yes
+      become: yes

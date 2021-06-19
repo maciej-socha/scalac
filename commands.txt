@@ -1,0 +1,13 @@
+#Docker
+docker build -t scalac .
+docker run -d -p 80:8888 --name scalac --restart=always -d scalac
+
+#Terraform
+terraform init
+terraform fmt
+terraform validate
+terraform apply
+terraform destroy
+
+#Ansible
+ansible-playbook -i inventory.txt playbook-ec2.yaml
