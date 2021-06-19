@@ -1,0 +1,30 @@
+- name: Test connectivity to taget servers
+  hosts: ec2
+  tasks:
+    - name: ping test
+      ping:
+
+- name: Update packages
+  hosts: ec2
+  become: yes
+  tasks:
+    - name: Update all packages
+      yum:
+        name: '*'
+        state: latest
+        update_only: yes
+
+- name: Install docker
+  hosts: ec2
+  become: yes
+  tasks:
+    - import_role:
+        name: docker
+
+- name: Install Jenkins
+  hosts: ec2
+  gather_facts: false
+  become: yes
+  tasks:
+  - import_role:
+      name: jenkins
